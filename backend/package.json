@@ -4,7 +4,7 @@
   "description": "Projeto realizado na semana Omnistack 11.0 da Rocketseat",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js"
+    "start": "nodemon src/index.js"
   },
   "keywords": [],
   "author": "",
