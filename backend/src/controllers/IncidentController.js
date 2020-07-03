@@ -1,6 +1,4 @@
 const connection = require('../database/connection');
-const { index } = require('./OngController');
-const { delete } = require('../database/connection');
 
 module.exports = {
     async index(req, res) {
