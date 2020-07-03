@@ -1,5 +1,6 @@
 const connection = require('../database/connection');
 const { index } = require('./OngController');
+const { delete } = require('../database/connection');
 
 module.exports = {
     async index(req, res) {
@@ -20,5 +21,23 @@ module.exports = {
         });
 
         return res.json({ id })
+    },
+
+    async delete(req, res) {
+        const { id } = req.params;
+        const ong_id = req.headers.authorization;
+
+        const incident = await connection('incidents')//na tabela incidents
+            .where('id', id)//buscar um incidente onde o id for igual a essa variavel id
+            .select('ong_id')//quero apenas a coluna ong_id
+            .first();//como só vai retornar um registro...
+
+        if (incident.ong_id !== ong_id) {
+            return res.status(401).json({ error: 'Operation not permitted' })
+        }
+
+        await connection('incidents').where('id',id).delete();
+
+        return res.status(204).send();
     }
 };
