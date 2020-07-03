@@ -2,7 +2,16 @@ const connection = require('../database/connection');
 
 module.exports = {
     async index(req, res) {
-        const incidents = await connection('incidents').select('*');
+        const { page = 1 } = req.query;
+
+        const [count] = await connection('incidents').count();
+
+        const incidents = await connection('incidents')
+            .limit(5)//limite de paginação
+            .offset((page - 1) * 5)//config da amostra de paginação
+            .select('*');
+
+        res.header('X-Total-Count', count['count(*)']);
 
         return res.json(incidents);
     },
@@ -34,7 +43,7 @@ module.exports = {
             return res.status(401).json({ error: 'Operation not permitted' })
         }
 
-        await connection('incidents').where('id',id).delete();
+        await connection('incidents').where('id', id).delete();
 
         return res.status(204).send();
     }
