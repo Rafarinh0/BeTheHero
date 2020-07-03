@@ -7,9 +7,16 @@ module.exports = {
         const [count] = await connection('incidents').count();
 
         const incidents = await connection('incidents')
+            .join('ongs', 'ongs.id', '=', 'incidents.ong_id')//trazer dados da tabela de ongs, e apenas dados onde o id da ongs seja igual ao id do incidents
             .limit(5)//limite de paginação
             .offset((page - 1) * 5)//config da amostra de paginação
-            .select('*');
+            .select(['incidents.*',
+                'ongs.name',
+                'ongs.email',
+                'ongs.whatsapp',
+                'ongs.city',
+                'ongs.uf'
+            ]);//quero todos os dados de incidente, mas da ong só alguns
 
         res.header('X-Total-Count', count['count(*)']);
 
