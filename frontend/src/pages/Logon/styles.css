@@ -1,11 +1,12 @@
 .login-container {
     width: 100%;
     max-width: 1120px;
-    height: 100vh;
+    height: 120vh; /** O responsivo seria 100vh e sem o zoom de 80%**/
+    zoom: 80%;
     margin: 0 auto;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
 }
 
 .login-container section.form {
@@ -21,23 +22,4 @@
 .login-container section.form form h1 {
     font-size: 32px;
     margin-bottom: 32px;
-}
-
-.login-container section.form form a {
-    display: flex;
-    align-items: center;
-    margin-top: 40px;
-    color: #41414d;
-    font-size: 18px;
-    text-decoration: none;
-    font-weight: 500;
-    transition: opacity 0.2;
-}
-
-.login-container section.form form a svg{
-    margin-right: 8px;
-}
-
-.login-container section.form form a:hover{
-    opacity: 0.8;
 }
