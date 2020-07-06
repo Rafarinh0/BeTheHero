@@ -7,6 +7,8 @@ import './styles.css';
 import logoImg from '../../assets/logo.svg';
 
 export default function Profile() {
+    const ongName = localStorage.getItem('ongName');
+
     return (
         <div className="profile-container">
             <header>
